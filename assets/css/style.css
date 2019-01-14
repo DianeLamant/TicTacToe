@@ -1,0 +1,44 @@
+#whosPlaying, #reset, #resultat {
+    text-align: center;
+    padding-top : 40px;
+}
+
+p {
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    font-size: 2rem;
+}
+
+#reset .bouton {
+    background-color: #9575cd;
+    color: white;
+    border-color: #9575cd;
+    font-size: 1.5rem;
+}
+
+#reset .bouton:hover {
+    background-color: #65499c;
+}
+
+.row div {
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+}
+
+#box2, #box8 {
+    border-right: 2px solid #65499c;
+    border-left: 2px solid #65499c;
+}
+
+#box4, #box6 {
+    border-top: 2px solid #65499c;;
+    border-bottom: 2px solid #65499c;;
+}
+
+#box5 {
+    border: 2px solid #65499c;;
+}
+
+.row {
+    justify-content: center;
+}
