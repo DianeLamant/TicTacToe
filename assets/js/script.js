@@ -16,6 +16,8 @@ let case7 = document.getElementById("box7");
 let case8 = document.getElementById("box8");
 let case9 = document.getElementById("box9");
 
+// Permet de changer de joueur après avoir jouer
+
 function changementJoueur() {
     if (currentPlayer == player1) {
         currentPlayer = player2;
@@ -24,45 +26,33 @@ function changementJoueur() {
     }
 }
 
+// Remet le jeu à zéro
+
 function reset() {
     location.reload();
 }
 
-case7.addEventListener("click", function () {
-    if (case8.src.endsWith(vide)) {
-        if (currentPlayer == player1) {
-            case7.src = croix;
-        } else {
-            case7.src = rond;
-        }
-    } else {
-        alert("La case est déjà prise !")
-    }
-    changementJoueur();
-})
+// Si la case est vide, elle se remplit suivant le joueur
 
-case8.addEventListener("click", function () {
-    if (case8.src.endsWith(vide)) {
-        if (currentPlayer == player1) {
-            case8.src = croix;
-        } else {
-            case8.src = rond;
-        }
+function game(caseX) {
+    if (caseX.src.endsWith(vide) && currentPlayer == player1) {
+        caseX.src = croix;
+        changementJoueur();
+    } else if (caseX.src.endsWith(vide) && currentPlayer == player2) {
+        caseX.src = rond;
+        changementJoueur();
     } else {
         alert("La case est déjà prise !")
     }
-    changementJoueur();
-})
+    
+}
 
-case9.addEventListener("click", function () {
-    if (case9.src.endsWith(vide)) {
-        if (currentPlayer == player1) {
-            case9.src = croix;
-        } else {
-            case9.src = rond;
-        }
-    } else {
-        alert("La case est déjà prise !")
-    }
-    changementJoueur();
-})
+case1.onclick =() => {game(case1)};
+case2.onclick =() => {game(case2)};
+case3.onclick =() => {game(case3)};
+case4.onclick =() => {game(case4)};
+case5.onclick =() => {game(case5)};
+case6.onclick =() => {game(case6)};
+case7.onclick =() => {game(case7)};
+case8.onclick =() => {game(case8)};
+case9.onclick =() => {game(case9)};
