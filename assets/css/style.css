@@ -20,25 +20,17 @@ p {
 }
 
 .row div {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     cursor: pointer;
-}
-
-#box2, #box8 {
-    border-right: 2px solid #65499c;
-    border-left: 2px solid #65499c;
-}
-
-#box4, #box6 {
-    border-top: 2px solid #65499c;;
-    border-bottom: 2px solid #65499c;;
-}
-
-#box5 {
-    border: 2px solid #65499c;;
+    padding: 10px;
+    border: 2px solid #65499c;
 }
 
 .row {
     justify-content: center;
+}
+
+#resultat {
+    display: none;
 }

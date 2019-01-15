@@ -2,44 +2,45 @@
 
 <html>
 
-    <head>
-        <meta charset="UTF8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="assets/css/style.css">
-        <script type="text/javascript" src="assets/js/script.js" defer></script>        
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-        <link href="https://fonts.googleapis.com/css?family=ZCOOL+QingKe+HuangYou" rel="stylesheet">
-        <title>Tic Tac Toe</title>
-    </head>
+<head>
+    <meta charset="UTF8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script type="text/javascript" src="assets/js/script.js" defer></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+        crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=ZCOOL+QingKe+HuangYou" rel="stylesheet">
+    <title>Tic Tac Toe</title>
+</head>
 
-    <body>
-        <div id="whosPlaying">
-            <p>Joueur : <span id="player"></span></p>
+<body>
+    <div id="whosPlaying">
+        <p>Joueur : <img src="assets/img/empty.png" id="player" alt="" width="2%"></p>
+    </div>
+    <div id="game">
+        <div class="row">
+            <div><img src="assets/img/empty.png" id="box1" alt="" width="100%"></div>
+            <div><img src="assets/img/empty.png" id="box2" alt="" width="100%"></div>
+            <div><img src="assets/img/empty.png" id="box3" alt="" width="100%"></div>
         </div>
-        <div id="game">
-            <div class="row">
-                <div><img src="assets/img/empty.png" id="box1" alt="" width="100%"></div>
-                <div><img src="assets/img/empty.png" id="box2" alt="" width="100%"></div>
-                <div><img src="assets/img/empty.png" id="box3" alt="" width="100%"></div>
-            </div>
-            <div class="row">
-                <div><img src="assets/img/empty.png" id="box4" alt="" width="100%"></div>
-                <div><img src="assets/img/empty.png" id="box5" alt="" width="100%"></div>
-                <div><img src="assets/img/empty.png" id="box6" alt="" width="100%"></div>
-            </div>
-            <div class="row">
-                <div><img src="assets/img/empty.png" id="box7" alt="" width="100%"></div>
-                <div><img src="assets/img/empty.png" id="box8" alt="" width="100%"></div>
-                <div><img src="assets/img/empty.png" id="box9" alt="" width="100%"></div>
-            </div>
-                            
+        <div class="row">
+            <div><img src="assets/img/empty.png" id="box4" alt="" width="100%"></div>
+            <div><img src="assets/img/empty.png" id="box5" alt="" width="100%"></div>
+            <div><img src="assets/img/empty.png" id="box6" alt="" width="100%"></div>
         </div>
-        <div id="reset">
-            <button onclick="reset()" type="button" class="btn btn-outline-primary bouton">Reset</button>
-        </div>  
-        <div id="resultat">
-            <p>Resultat : <span id="result"></span></p>
+        <div class="row">
+            <div><img src="assets/img/empty.png" id="box7" alt="" width="100%"></div>
+            <div><img src="assets/img/empty.png" id="box8" alt="" width="100%"></div>
+            <div><img src="assets/img/empty.png" id="box9" alt="" width="100%"></div>
         </div>
-    </body>
+
+    </div>
+    <div id="reset">
+        <button onclick="reset()" type="button" class="btn btn-outline-primary bouton">Reset</button>
+    </div>
+    <div id="resultat">
+        <p>Joueur <span id="result"></span> a gagne !</p>
+    </div>
+</body>
 
 </html>
