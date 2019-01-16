@@ -1,13 +1,15 @@
 let vide = "assets/img/empty.png";
-let croix = "assets/img/cross-2.png";
-let rond = "assets/img/circle-3.png";
-let etatBox = [croix, rond];
+let croix = "assets/img/hippo3.png";
+let rond = "assets/img/hippo2.png";
+let etatBox = [vide, croix, rond];
 let player1 = 1;
 let player2 = 2;
 let players = [player1, player2];
 let currentPlayer = player1;
 let joueurActuel = document.getElementById("player");
-let textFinal = document.getElementById("resultat")
+let winner = document.getElementById("gagnant");
+let textFinal = document.getElementById("winnerText");
+let modalBox = document.getElementById("resultat");
 let case1 = document.getElementById("box1");
 let case2 = document.getElementById("box2");
 let case3 = document.getElementById("box3");
@@ -17,6 +19,8 @@ let case6 = document.getElementById("box6");
 let case7 = document.getElementById("box7");
 let case8 = document.getElementById("box8");
 let case9 = document.getElementById("box9");
+let allCases = [case1, case2, case3, case4, case5, case6, case7, case8, case9];
+let grid = document.getElementById("boxes");;
 
 // Indique a quel joueur c'est de jouer 
 
@@ -27,7 +31,6 @@ function player() {
         joueurActuel.src = rond;
     }
 }
-
 player();
 
 // Permet de changer de joueur après avoir jouer
@@ -43,22 +46,15 @@ function changementJoueur() {
 // Fin du jeu
 
 function end() {
-    // alert("Fin")
-    textFinal.style.display = 'block';
+    modalBox.style.display = 'block';
+    grid.style.cursor = 'default';
+    grid.style.pointerEvents = 'none';
 }
 
 // Remet le jeu à zéro
 
 function reset() {
-    case1.src = vide;
-    case2.src = vide;
-    case3.src = vide;
-    case4.src = vide;
-    case5.src = vide;
-    case6.src = vide;
-    case7.src = vide;
-    case8.src = vide;
-    case9.src = vide;
+    location.reload();
 }
 
 // Si la case est vide, elle se remplit suivant le joueur
@@ -90,58 +86,47 @@ case9.onclick = () => { game(case9) };
 
 
 function win() {
-
-    // Pour chaque joueur
-    for (let etatBoxIndex in etatBox) {
-        // On vérifie J1 a gagné dans une des colonnes
-        if (
-            (case1.src.endsWith(croix) && case4.src.endsWith(croix) && case7.src.endsWith(croix)) ||
-            (case2.src.endsWith(croix) && case5.src.endsWith(croix) && case8.src.endsWith(croix)) ||
-            (case3.src.endsWith(croix) && case6.src.endsWith(croix) && case9.src.endsWith(croix))
-        ) {
-            end();
-            break;
-
-            // On vérifie J1 a gagné dans une des lignes    
-        } else if (
-            (case1.src.endsWith(croix) && case2.src.endsWith(croix) && case3.src.endsWith(croix)) ||
-            (case4.src.endsWith(croix) && case5.src.endsWith(croix) && case6.src.endsWith(croix)) ||
-            (case7.src.endsWith(croix) && case8.src.endsWith(croix) && case9.src.endsWith(croix))
-        ) {
-            end();
-            break;
-            // On vérifie J1 a gagne dans une des diagonale
-        } else if (
-            (case1.src.endsWith(croix) && case5.src.endsWith(croix) && case9.src.endsWith(croix)) ||
-            (case3.src.endsWith(croix) && case5.src.endsWith(croix) && case7.src.endsWith(croix))
-        ) {
-            end();
-            break;
-            // On vérifie J2 a gagné dans une des colonnes
-
-        } else if (
-            (case1.src.endsWith(rond) && case4.src.endsWith(rond) && case7.src.endsWith(rond)) ||
-            (case2.src.endsWith(rond) && case5.src.endsWith(rond) && case8.src.endsWith(rond)) ||
-            (case3.src.endsWith(rond) && case6.src.endsWith(rond) && case9.src.endsWith(rond))
-        ) {
-            end();
-            break;
-
-            // On vérifie J2 a gagné dans une des lignes    
-        } else if (
-            (case1.src.endsWith(rond) && case2.src.endsWith(rond) && case3.src.endsWith(rond)) ||
-            (case4.src.endsWith(rond) && case5.src.endsWith(rond) && case6.src.endsWith(rond)) ||
-            (case7.src.endsWith(rond) && case8.src.endsWith(rond) && case9.src.endsWith(rond))
-        ) {
-            end();
-            break;
-            // On vérifie J2 a gagne dans une des diagonale
-        } else if (
-            (case1.src.endsWith(rond) && case5.src.endsWith(rond) && case9.src.endsWith(rond)) ||
-            (case3.src.endsWith(rond) && case5.src.endsWith(rond) && case7.src.endsWith(rond))
-        ) {
-            end();
-            break;
-        }
+    if (
+        // Colonnes
+        (case1.src.endsWith(croix) && case4.src.endsWith(croix) && case7.src.endsWith(croix)) ||
+        (case2.src.endsWith(croix) && case5.src.endsWith(croix) && case8.src.endsWith(croix)) ||
+        (case3.src.endsWith(croix) && case6.src.endsWith(croix) && case9.src.endsWith(croix)) ||
+        // Lignes
+        (case1.src.endsWith(croix) && case2.src.endsWith(croix) && case3.src.endsWith(croix)) ||
+        (case4.src.endsWith(croix) && case5.src.endsWith(croix) && case6.src.endsWith(croix)) ||
+        (case7.src.endsWith(croix) && case8.src.endsWith(croix) && case9.src.endsWith(croix)) ||
+        // Diagonales
+        (case1.src.endsWith(croix) && case5.src.endsWith(croix) && case9.src.endsWith(croix)) ||
+        (case3.src.endsWith(croix) && case5.src.endsWith(croix) && case7.src.endsWith(croix))
+    ) {
+        winner.src = croix;
+        end();
+    } else if (
+        // Colonnes
+        (case1.src.endsWith(rond) && case4.src.endsWith(rond) && case7.src.endsWith(rond)) ||
+        (case2.src.endsWith(rond) && case5.src.endsWith(rond) && case8.src.endsWith(rond)) ||
+        (case3.src.endsWith(rond) && case6.src.endsWith(rond) && case9.src.endsWith(rond)) ||
+        // Lignes
+        (case1.src.endsWith(rond) && case2.src.endsWith(rond) && case3.src.endsWith(rond)) ||
+        (case4.src.endsWith(rond) && case5.src.endsWith(rond) && case6.src.endsWith(rond)) ||
+        (case7.src.endsWith(rond) && case8.src.endsWith(rond) && case9.src.endsWith(rond)) ||
+        // Diagonales
+        (case1.src.endsWith(rond) && case5.src.endsWith(rond) && case9.src.endsWith(rond)) ||
+        (case3.src.endsWith(rond) && case5.src.endsWith(rond) && case7.src.endsWith(rond))
+    ) {
+        winner.src = rond;
+        end();
+    } else if (
+        !case1.src.endsWith(vide) && !case2.src.endsWith(vide) && !case3.src.endsWith(vide) && !case4.src.endsWith(vide) && !case5.src.endsWith(vide) && !case6.src.endsWith(vide) && !case7.src.endsWith(vide) && !case8.src.endsWith(vide) && !case9.src.endsWith(vide)
+    ) {
+        textFinal.innerHTML = "Vous avez perdu !";
+        end();
     }
+
 }
+
+    // for (i = 0; i < allCases.length; i++) {
+    //     if (!allCases[i].src.endsWith(vide)) {
+    //         end();
+    //         winner.src = vide;
+    //     }

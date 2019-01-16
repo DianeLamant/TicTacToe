@@ -1,6 +1,42 @@
-#whosPlaying, #reset, #resultat {
+#body {
+    background-image: url("../img/background.jpg");
+    background-size: 100%;
+}
+
+#whosPlaying, #reset {
     text-align: center;
     padding-top : 40px;
+}
+
+#game {
+    position: relative;
+    justify-content: center;
+}
+
+#resultat {
+    display: none;
+    z-index: 2;
+    width: 400px;
+    margin: auto;
+    position: absolute;
+    top: 130px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid black;
+    box-shadow: 4px -4px 5px grey;
+    padding: 10px;
+    background: white;
+}
+
+#resultat #close {
+    border: none;
+    font-size: 2rem; 
+    padding-right: 15px;
+}
+
+#resultat p {
+    padding: 20px 0 0 15px;
+    text-align: center;
 }
 
 p {
@@ -9,14 +45,14 @@ p {
 }
 
 #reset .bouton {
-    background-color: #9575cd;
+    background-color: #65499c;
     color: white;
-    border-color: #9575cd;
+    border-color: #65499c;
     font-size: 1.5rem;
 }
 
 #reset .bouton:hover {
-    background-color: #65499c;
+    background-color: #382957;
 }
 
 .row div {
@@ -24,13 +60,10 @@ p {
     height: 150px;
     cursor: pointer;
     padding: 10px;
-    border: 2px solid #65499c;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.7);
 }
 
-.row {
+#game .row {
     justify-content: center;
-}
-
-#resultat {
-    display: none;
 }
