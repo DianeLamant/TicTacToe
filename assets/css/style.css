@@ -40,19 +40,25 @@
 }
 
 p {
-    font-family: 'ZCOOL QingKe HuangYou', cursive;
-    font-size: 2rem;
+    font-family: 'Teko', sans-serif;
+    font-size: 2.4rem;
 }
 
 #reset .bouton {
+    font-family: 'Teko', sans-serif;
     background-color: #65499c;
     color: white;
     border-color: #65499c;
-    font-size: 1.5rem;
+    font-size: 2.4em;
+    -webkit-animation: rotating 0.5s linear;
+    animation-iteration-count: 3;
+    animation: zoominoutsinglefeatured 1.5s forwards;
+
 }
 
 #reset .bouton:hover {
-    background-color: #382957;
+    background-color: #8d74be;
+    border-color: #8d74be;
 }
 
 .row div {
@@ -67,3 +73,30 @@ p {
 #game .row {
     justify-content: center;
 }
+/* 
+@-webkit-keyframes rotating {
+    from{
+        -webkit-transform: rotate(0deg);
+    }
+    to{
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes zoominoutsinglefeatured {
+    0% {
+        transform: scale(0.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+} */
+
+@-webkit-keyframes kf_scale {
+    0% {
+      -webkit-transform: scale(0) rotate(360deg);
+    }
+    100% {
+      -webkit-transform: scale(1) rotate(-360deg);
+    }
+  }

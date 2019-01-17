@@ -74,7 +74,7 @@ function game(caseX) {
     win();
 }
 
-case1.onclick = () => { game(case1) };
+case1.onclick = () => { animation(); game(case1) };
 case2.onclick = () => { game(case2) };
 case3.onclick = () => { game(case3) };
 case4.onclick = () => { game(case4) };
@@ -119,14 +119,19 @@ function win() {
     } else if (
         !case1.src.endsWith(vide) && !case2.src.endsWith(vide) && !case3.src.endsWith(vide) && !case4.src.endsWith(vide) && !case5.src.endsWith(vide) && !case6.src.endsWith(vide) && !case7.src.endsWith(vide) && !case8.src.endsWith(vide) && !case9.src.endsWith(vide)
     ) {
-        textFinal.innerHTML = "Vous avez perdu !";
+        textFinal.innerHTML = "Egalité !";
         end();
     }
 
 }
 
-    // for (i = 0; i < allCases.length; i++) {
-    //     if (!allCases[i].src.endsWith(vide)) {
-    //         end();
-    //         winner.src = vide;
-    //     }
+// for (i = 0; i < allCases.length; i++) {
+//     if (!allCases[i].src.endsWith(vide)) {
+//         end();
+//         winner.src = vide;
+//     }
+
+function animation(caseX) {
+    caseX.style = '-webkit-transform:scale(0) rotate(360deg);';
+    caseX.style = '-webkit-animation : kf_scale 1s';
+}
