@@ -1,6 +1,6 @@
 #body {
     background-image: url("../img/background.jpg");
-    background-size: 100%;
+    background-size: 100rem;
 }
 
 #whosPlaying, #reset {
@@ -62,6 +62,7 @@ p {
 }
 
 .row div {
+    text-align: center;
     width: 150px;
     height: 150px;
     cursor: pointer;
@@ -73,24 +74,7 @@ p {
 #game .row {
     justify-content: center;
 }
-/* 
-@-webkit-keyframes rotating {
-    from{
-        -webkit-transform: rotate(0deg);
-    }
-    to{
-        -webkit-transform: rotate(360deg);
-    }
-}
 
-@keyframes zoominoutsinglefeatured {
-    0% {
-        transform: scale(0.1);
-    }
-    100% {
-        transform: scale(1);
-    }
-} */
 
 @-webkit-keyframes kf_scale {
     0% {
