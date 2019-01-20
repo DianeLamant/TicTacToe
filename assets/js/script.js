@@ -10,19 +10,14 @@ let joueurActuel = document.getElementById("player");
 let winner = document.getElementById("gagnant");
 let textFinal = document.getElementById("winnerText");
 let modalBox = document.getElementById("resultat");
-let case1 = document.getElementById("box1");
-let case2 = document.getElementById("box2");
-let case3 = document.getElementById("box3");
-let case4 = document.getElementById("box4");
-let case5 = document.getElementById("box5");
-let case6 = document.getElementById("box6");
-let case7 = document.getElementById("box7");
-let case8 = document.getElementById("box8");
-let case9 = document.getElementById("box9");
-let allCases = [case1, case2, case3, case4, case5, case6, case7, case8, case9];
+let allCases = document.getElementsByClassName("box");
 let grid = document.getElementById("boxes");;
-
-// Indique a quel joueur c'est de jouer 
+let matrice = [
+    [0, 0, 0],
+    [0, 0, 0],
+    [0, 0, 0]
+]
+// Indique a quel joueur c'est de jouer
 
 function player() {
     if (currentPlayer == player1) {
@@ -45,60 +40,83 @@ function changementJoueur() {
 
 // Si la case est vide, elle se remplit suivant le joueur
 
-function game(caseX) {
-    if (caseX.src.endsWith(vide) && currentPlayer == player1) {
-        caseX.src = croix;
-        changementJoueur();
-        player();
-    } else if (caseX.src.endsWith(vide) && currentPlayer == player2) {
-        caseX.src = rond;
-        changementJoueur();
-        player();
-    } else {
-        alert("La case est déjà prise !");
+for (i = 0; i < allCases.length; i++) {
+    allCases[i].onclick = function (event) {
+        animation(event.target);
+        if (event.target.src.endsWith(vide) && currentPlayer == player1) {
+            event.target.src = croix;
+            matriceP1();
+            changementJoueur();
+            player();
+        } else if (event.target.src.endsWith(vide) && currentPlayer == player2) {
+            event.target.src = rond;
+            matriceP2();
+            changementJoueur();
+            player();
+        } else {
+            alert("La case est déjà prise !");
+        }
+        win(croix);
+        win(rond);
     }
-    win(croix);
-    win(rond);
 }
 
-case1.onclick = () => { animation(case1), game(case1) };
-case2.onclick = () => { animation(case2), game(case2) };
-case3.onclick = () => { animation(case3), game(case3) };
-case4.onclick = () => { animation(case4), game(case4) };
-case5.onclick = () => { animation(case5), game(case5) };
-case6.onclick = () => { animation(case6), game(case6) };
-case7.onclick = () => { animation(case7), game(case7) };
-case8.onclick = () => { animation(case8), game(case8) };
-case9.onclick = () => { animation(case9), game(case9) };
+function matriceP1() {
+    for ( let laCase in matrice ) {
+            matrice[laCase] = player1;
+    }
+    console.log(matrice);
+}
+
+function matriceP2() {
+    for ( let laCase in matrice ) {
+            matrice[laCase] = player    2;
+    }
+    console.log(matrice);
+}
 
 // Fonction qui vérifie les combinaisons gagnantes
 
-function win(etatBoxX) {
-    if (
-        // Colonnes
-        (case1.src.endsWith(etatBoxX) && case4.src.endsWith(etatBoxX) && case7.src.endsWith(etatBoxX)) ||
-        (case2.src.endsWith(etatBoxX) && case5.src.endsWith(etatBoxX) && case8.src.endsWith(etatBoxX)) ||
-        (case3.src.endsWith(etatBoxX) && case6.src.endsWith(etatBoxX) && case9.src.endsWith(etatBoxX)) ||
-        // Lignes
-        (case1.src.endsWith(etatBoxX) && case2.src.endsWith(etatBoxX) && case3.src.endsWith(etatBoxX)) ||
-        (case4.src.endsWith(etatBoxX) && case5.src.endsWith(etatBoxX) && case6.src.endsWith(etatBoxX)) ||
-        (case7.src.endsWith(etatBoxX) && case8.src.endsWith(etatBoxX) && case9.src.endsWith(etatBoxX)) ||
-        // Diagonales
-        (case1.src.endsWith(etatBoxX) && case5.src.endsWith(etatBoxX) && case9.src.endsWith(etatBoxX)) ||
-        (case3.src.endsWith(etatBoxX) && case5.src.endsWith(etatBoxX) && case7.src.endsWith(etatBoxX))
-    ) {
-        winner.src = etatBoxX;
-        end();
-    } else if (allCases.every(equality)) {
-        textFinal.innerHTML = "Egalité !";
-        end();
+function win() {
+    console.log(matrice);
+    for( let player of players ) {
+    	if(
+    		( matrice[0][0] === player && matrice[1][0] === player && matrice[2][0] === player ) ||
+    		( matrice[0][1] === player && matrice[1][1] === player && matrice[2][1] === player ) ||
+    		( matrice[0][2] === player && matrice[1][2] === player && matrice[2][2] === player )
+    	) {
+          winner.src = player;
+          end();
+    	}
     }
 }
 
-function equality(i) {
-    return !i.src.endsWith(vide)
-}
-;
+
+// function win(etatBoxX) {
+//     if (
+//         // Colonnes
+//         (allCases[0].src.endsWith(etatBoxX) && allCases[3].src.endsWith(etatBoxX) && allCases[6].src.endsWith(etatBoxX)) ||
+//         (allCases[1].src.endsWith(etatBoxX) && allCases[4].src.endsWith(etatBoxX) && allCases[7].src.endsWith(etatBoxX)) ||
+//         (allCases[2].src.endsWith(etatBoxX) && allCases[5].src.endsWith(etatBoxX) && allCases[8].src.endsWith(etatBoxX)) ||
+//         // Lignes
+//         (allCases[0].src.endsWith(etatBoxX) && allCases[1].src.endsWith(etatBoxX) && allCases[2].src.endsWith(etatBoxX)) ||
+//         (allCases[3].src.endsWith(etatBoxX) && allCases[4].src.endsWith(etatBoxX) && allCases[5].src.endsWith(etatBoxX)) ||
+//         (allCases[6].src.endsWith(etatBoxX) && allCases[7].src.endsWith(etatBoxX) && allCases[8].src.endsWith(etatBoxX)) ||
+//         // Diagonales
+//         (allCases[0].src.endsWith(etatBoxX) && allCases[4].src.endsWith(etatBoxX) && allCases[8].src.endsWith(etatBoxX)) ||
+//         (allCases[2].src.endsWith(etatBoxX) && allCases[4].src.endsWith(etatBoxX) && allCases[6].src.endsWith(etatBoxX))
+//     ) {
+//         winner.src = etatBoxX;
+//         end();
+//     } else if (allCases.every(equality)) {
+//         textFinal.innerHTML = "Egalité !";
+//         end();
+//     }
+// }
+//
+// function equality(i) {
+//     return !i.src.endsWith(vide);
+// }
 
 // Fin du jeu
 
