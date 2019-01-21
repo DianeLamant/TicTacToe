@@ -16,7 +16,8 @@ let matrice = [
     [0, 0, 0],
     [0, 0, 0],
     [0, 0, 0]
-]
+];
+
 // Indique a quel joueur c'est de jouer
 
 function player() {
@@ -43,6 +44,7 @@ function changementJoueur() {
 for (i = 0; i < allCases.length; i++) {
     allCases[i].onclick = function (event) {
         animation(event.target);
+        console.log(matrice);
         if (event.target.src.endsWith(vide) && currentPlayer == player1) {
             event.target.src = croix;
             matriceP1();
@@ -56,41 +58,51 @@ for (i = 0; i < allCases.length; i++) {
         } else {
             alert("La case est déjà prise !");
         }
-        win(croix);
-        win(rond);
+        // win(croix);
+        // win(rond);
     }
 }
 
 function matriceP1() {
-    for ( let laCase in matrice ) {
-            matrice[laCase] = player1;
+    for (x = 0; x < matrice.length; x++) {
+        for (y = 0; y < matrice[x].length; y++) {
+            matrice[x][y] = player1;
+        }
     }
-    console.log(matrice);
 }
 
+
 function matriceP2() {
-    for ( let laCase in matrice ) {
-            matrice[laCase] = player    2;
+    for (x = 0; x < matrice.length; x++) {
+        for (y = 0; y < matrice[x].length; y++) {
+            matrice[x][y] = player2;
+        }
     }
-    console.log(matrice);
 }
 
 // Fonction qui vérifie les combinaisons gagnantes
 
 function win() {
-    console.log(matrice);
-    for( let player of players ) {
-    	if(
-    		( matrice[0][0] === player && matrice[1][0] === player && matrice[2][0] === player ) ||
-    		( matrice[0][1] === player && matrice[1][1] === player && matrice[2][1] === player ) ||
-    		( matrice[0][2] === player && matrice[1][2] === player && matrice[2][2] === player )
-    	) {
-          winner.src = player;
-          end();
-    	}
+    // console.log(matrice);
+    for (let player of players) {
+        if (
+            // Colonnes
+            (matrice[0][0] === player && matrice[1][0] === player && matrice[2][0] === player) ||
+            (matrice[0][1] === player && matrice[1][1] === player && matrice[2][1] === player) ||
+            (matrice[0][2] === player && matrice[1][2] === player && matrice[2][2] === player) ||
+            // Lignes
+            (matrice[0][0] === player && matrice[0][1] === player && matrice[0][2] === player) ||
+            (matrice[1][0] === player && matrice[1][1] === player && matrice[1][2] === player) ||
+            (matrice[2][0] === player && matrice[2][1] === player && matrice[2][2] === player) ||
+            // Diagonales
+            (matrice[0][2] === player && matrice[1][1] === player && matrice[2][0] === player) ||
+            (matrice[0][0] === player && matrice[1][1] === player && matrice[2][2] === player)
+        ) {
+            winner.src = player;
+            end();
+        }
     }
 }
-
 
 // function win(etatBoxX) {
 //     if (
@@ -129,7 +141,14 @@ function end() {
 // Remet le jeu à zéro
 
 function reset() {
-    location.reload();
+    for (i = 0; i < allCases.length; i++) {
+        allCases[i].src = vide;
+    }
+    currentPlayer = player1;
+    joueurActuel.src = croix;
+    modalBox.style.display = 'none';
+    grid.style.cursor = 'pointer';
+    grid.style.pointerEvents = '';
 }
 
 function animation(caseX) {
