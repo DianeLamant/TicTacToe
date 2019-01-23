@@ -1,6 +1,6 @@
 #body {
     background-image: url("../img/background.jpg");
-    background-size: 100rem;
+    background-size: 100%;
 }
 
 #whosPlaying, #reset {
@@ -41,18 +41,26 @@
 
 p {
     font-family: 'Teko', sans-serif;
-    font-size: 2.4rem;
+    font-size: 3rem;
 }
 
-#reset .bouton {
+#score {
+    top: 120px;
+}
+
+#score span {
+    font-size: 3rem;
+    color: white;
+    /* padding-top: 50px; */
+}
+
+#reset button {
     font-family: 'Teko', sans-serif;
     background-color: #65499c;
     color: white;
     border-color: #65499c;
     font-size: 2.4em;
-    -webkit-animation: rotating 0.5s linear;
-    animation-iteration-count: 3;
-    animation: zoominoutsinglefeatured 1.5s forwards;
+    margin: 0 30px;
 
 }
 
@@ -61,7 +69,7 @@ p {
     border-color: #8d74be;
 }
 
-.row div {
+#boxes .animation {
     text-align: center;
     width: 150px;
     height: 150px;
@@ -71,8 +79,16 @@ p {
     border: 2px solid rgba(255, 255, 255, 0.7);
 }
 
-#game .row {
+#boxes .animation:hover {
+    background-color: rgba(255, 255, 255, 0);
+}
+
+#boxes .row {
     justify-content: center;
+}
+
+#score .row {
+    justify-content: flex-start;
 }
 
 
@@ -83,4 +99,87 @@ p {
     100% {
       -webkit-transform: scale(1) rotate(-360deg);
     }
-  }
+}
+
+@media screen and (max-width: 990px) {
+
+    #score {
+        top: 20px;
+        text-align: center;
+    }
+
+    #whosPlaying {
+        padding-top: 20px;
+    }
+    
+    #reset {
+        padding-top : 30px;
+    }
+    
+}
+
+@media screen and (max-width: 550px) {
+
+    #boxes .animation {
+        width: 100px;
+        height: 100px;
+
+    }
+
+    #resultat {
+        width: 350px;
+    }
+
+    #whosPlaying, #reset {
+        padding-top : 60px;
+    }
+
+    #reset .bouton {
+        font-size: 1.5em;
+    }
+
+    #score img {
+        width: 80px;
+        height: 80px;
+    }
+    
+}
+
+@media screen and (max-width: 270px) {
+
+    #boxes .animation {
+        width: 25px;
+        height: 25px;
+
+    }
+
+    #resultat {
+        width: 300px;
+    }
+
+    #whosPlaying {
+        padding-top : 60px;
+    }
+
+    #reset {
+        padding-top: 30px;
+    }
+    
+    #whosPlaying p {
+        font-family: 'Teko', sans-serif;
+        font-size: 1rem;
+    }    
+
+    #whosPlaying img {
+        width: 20px;
+    }
+
+    #reset .bouton {
+        font-size: 1em;
+    }
+
+    #score img {
+        width: 50px;
+        height: 50px;
+    }
+}

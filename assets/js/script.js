@@ -1,7 +1,6 @@
 let vide = "assets/img/empty.png";
-let croix = "assets/img/hippo3.png";
-let rond = "assets/img/hippo2.png";
-let etatBox = [vide, croix, rond];
+let croix = "assets/img/hippo-bleu.png";
+let rond = "assets/img/hippo-rose.png";
 let player1 = 1;
 let player2 = 2;
 let players = [player1, player2];
@@ -11,7 +10,11 @@ let winner = document.getElementById("gagnant");
 let textFinal = document.getElementById("winnerText");
 let modalBox = document.getElementById("resultat");
 let allCases = document.getElementsByClassName("box");
-let grid = document.getElementById("boxes");;
+let grid = document.getElementById("boxes");
+let setScoreP1 = 0;
+let setScoreP2 = 0;
+let scoreP1 = document.getElementById("resultatP1");
+let scoreP2 = document.getElementById("resultatP2");
 let matrice = [
     [0, 0, 0],
     [0, 0, 0],
@@ -49,9 +52,8 @@ for (i = 0; i < allCases.length; i++) {
             changementJoueur();
             win(rond, player2);
         } else {
-            alert("La case est déjà prise !");
+            alert("La case est déjà prise !")
         }
-
     }
 }
 
@@ -73,8 +75,16 @@ function win(gagnant, player) {
     ) {
         winner.src = gagnant;
         end();
+        if (player == player1) {
+            setScoreP1++;
+            animScore(scoreP1);
+        } else if (player == player2) {
+            setScoreP2++;
+            animScore(scoreP2);
+        }
+        updateScore();
     } else {
-        if (matrice.every(equality)) {
+        if (equality()) {
             textFinal.innerHTML = "Egalité !";
             end();
         }
@@ -82,13 +92,21 @@ function win(gagnant, player) {
 }
 
 function equality() {
-    let x = event.target.dataset.x;
-    let y = event.target.dataset.y;
     for (x = 0; x < matrice.length; x++) {
-        (y = 0; y < matrice.length; y++) {
-            matrice[x][y] != 0;
+        for (y = 0; y < matrice.length; y++) {
+            if (matrice[x][y] == 0) {
+                return false;
+            }
         }
     }
+    return true;
+}
+
+// Score
+
+function updateScore() {
+    scoreP1.innerHTML = setScoreP1;
+    scoreP2.innerHTML = setScoreP2;
 }
 
 // Fin du jeu
@@ -102,6 +120,28 @@ function end() {
 // Remet le jeu à zéro
 
 function reset() {
+    for (i = 0; i < allCases.length; i++) {
+        allCases[i].src = vide;
+        stopAnimation(allCases[i]);
+    }
+    currentPlayer = player1;
+    joueurActuel.src = croix;
+    modalBox.style.display = 'none';
+    grid.style.cursor = 'pointer';
+    grid.style.pointerEvents = '';
+    matrice = [
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0]
+    ];
+}
+
+function newGame() {
+    scoreP1.innerHTML = 0;
+    scoreP2.innerHTML = 0;
+    setScoreP1 = 0;
+    setScoreP2 = 0;
+    updateScore();
     for (i = 0; i < allCases.length; i++) {
         allCases[i].src = vide;
     }
@@ -120,4 +160,14 @@ function reset() {
 function animation(caseX) {
     caseX.style = '-webkit-transform:scale(0) rotate(360deg);';
     caseX.style = '-webkit-animation : kf_scale 0.7s';
+}
+
+function stopAnimation(caseX) {
+    caseX.style = '';
+    caseX.style = '';
+}
+
+function animScore(scoreX) {
+    scoreX.style = 'transition: transform .15s;';
+    scoreX.style = '-webkit-transform: scale(0.5);';
 }
