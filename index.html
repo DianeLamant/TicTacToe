@@ -14,13 +14,20 @@
 </head>
 
 <body id="body">
-
-    <div id="whosPlaying">
-        <p>Joueur : <img src="assets/img/empty.png" id="player" alt="" width="60px"></p>
-    </div>
     <div class="row" id="game">
-        <div class="col-lg-3" id="format">
+        <div class="col-12" id="whosPlaying">
+            <p>Joueur : <img src="assets/img/empty.png" id="player" alt="" width="60px"></p>
+        </div>
 
+        <div class="col-lg-3" id="format">
+            <div class="row">
+                <div class="col-lg-12 col-md-2 col-12">
+                    <button onclick="deuxJoueurs()" type="button" class="btn btn-outline-primary bouton">2 joueurs</button>
+                </div>
+                <div class="col-lg-12 col-md-2 col-2">
+                    <button onclick="unJoueur()" type="button" class="btn btn-outline-primary bouton2">1 joueur</button>
+                </div>
+            </div>
         </div>
         <div class="col-md-12 col-lg-6" id="boxes">
             <div class="row">

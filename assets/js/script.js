@@ -24,36 +24,74 @@ let matrice = [
 // Indique a quel joueur c'est de jouer
 
 function changementJoueur() {
-    if (currentPlayer == player2) {
-        joueurActuel.src = croix;
-        currentPlayer = player1;
-    } else if (currentPlayer == player1) {
+    if (currentPlayer == player1) {
         joueurActuel.src = rond;
         currentPlayer = player2;
+    } else if (currentPlayer == player2) {
+        joueurActuel.src = croix;
+        currentPlayer = player1;
     }
 }
 changementJoueur();
 
 // Si la case est vide, elle se remplit suivant le joueur
-
-for (i = 0; i < allCases.length; i++) {
-    allCases[i].onclick = function (event) {
-        animation(event.target);
-        let x = event.target.dataset.x;
-        let y = event.target.dataset.y;
-        if (matrice[x][y] == 0 && currentPlayer == player1) {
-            matrice[x][y] = 1;
-            event.target.src = croix;
-            changementJoueur();
-            win(croix, player1);
-        } else if (matrice[x][y] == 0 && currentPlayer == player2) {
-            matrice[x][y] = 2;
-            event.target.src = rond;
-            changementJoueur();
-            win(rond, player2);
-        } else {
-            alert("La case est déjà prise !")
+function deuxJoueurs() {
+    for (i = 0; i < allCases.length; i++) {
+        allCases[i].onclick = function (event) {
+            animation(event.target);
+            let x = event.target.dataset.x;
+            let y = event.target.dataset.y;
+            if (matrice[x][y] == 0 && currentPlayer == player1) {
+                matrice[x][y] = 1;
+                event.target.src = croix;
+                changementJoueur();
+                win(croix, player1);
+            } else if (matrice[x][y] == 0 && currentPlayer == player2) {
+                matrice[x][y] = 2;
+                event.target.src = rond;
+                changementJoueur();
+                win(rond, player2);
+            } else {
+                alert("La case est déjà prise !")
+            }
         }
+    }
+}
+
+function unJoueur() {
+    if (currentPlayer == player1) {
+        for (i = 0; i < allCases.length; i++) {
+            allCases[i].onclick = function (event) {
+                animation(event.target);
+                let x = event.target.dataset.x;
+                let y = event.target.dataset.y;
+                if (matrice[x][y] == 0 && currentPlayer == player1) {
+                    matrice[x][y] = 1;
+                    event.target.src = croix;
+                    changementJoueur();
+                    win(croix, player1);
+                    unJoueur();
+                }
+            }
+        }
+    } else if (currentPlayer == player2) {
+        for (i = 0; i < allCases.length; i++) {
+            if (allCases[i] == 0) {
+                let casesVides = [];
+                console.log(allCases[i]);
+                console.log(casesVides);
+
+                casesVides.push(allCases[i])
+                console.log(casesVides);
+            }
+        }
+        let chosenCase = casesVides[Math.floor(Math.random() * casesVides.lenght)];
+        console.log(chosenCase);
+        setTimeout(function () {
+            chosenCase.src = rond;
+        }, 3000);
+        changementJoueur();
+        win(rond, player2);
     }
 }
 
