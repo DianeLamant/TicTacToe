@@ -1,6 +1,15 @@
 #body {
     background-image: url("../img/background.jpg");
-    background-size: 100rem;
+    background-size: 100%;
+}
+
+p {
+    font-family: 'Teko', sans-serif;
+    font-size: 3rem;
+}
+
+#whosPlaying, #boxes, #score, #reset {
+    visibility: hidden;
 }
 
 #whosPlaying, #reset {
@@ -13,55 +22,49 @@
     justify-content: center;
 }
 
-#resultat {
-    display: none;
-    z-index: 2;
-    width: 400px;
-    margin: auto;
+#whosPlaying {
     position: absolute;
-    top: 130px;
-    left: 50%;
-    transform: translateX(-50%);
-    border: 1px solid black;
-    box-shadow: 4px -4px 5px grey;
-    padding: 10px;
-    background: white;
 }
 
-#resultat #close {
-    border: none;
-    font-size: 2rem; 
-    padding-right: 15px;
-}
-
-#resultat p {
-    padding: 20px 0 0 15px;
+#format .row {
     text-align: center;
+    padding-left: 180px;
+    padding-top: 140px;
+
 }
 
-p {
+#format button {
     font-family: 'Teko', sans-serif;
-    font-size: 2.4rem;
-}
-
-#reset .bouton {
-    font-family: 'Teko', sans-serif;
-    background-color: #65499c;
+    background-color: #74254d;
     color: white;
-    border-color: #65499c;
+    border-color: #74254d;
     font-size: 2.4em;
-    -webkit-animation: rotating 0.5s linear;
-    animation-iteration-count: 3;
-    animation: zoominoutsinglefeatured 1.5s forwards;
-
 }
 
-#reset .bouton:hover {
-    background-color: #8d74be;
-    border-color: #8d74be;
+#format .bouton2 {
+    margin-top: 30px;
 }
 
-.row div {
+#format button:hover {
+    background-color: #ad3873;
+    border-color: #ad3873;
+}
+
+#score .row {
+    padding-top: 120px;
+    justify-content: flex-start; 
+}
+
+#score span {
+    font-size: 3rem;
+    color: white;
+}
+
+#boxes, #format, #score {
+    top: 150px;
+}
+
+#boxes .animation {
     text-align: center;
     width: 150px;
     height: 150px;
@@ -71,10 +74,83 @@ p {
     border: 2px solid rgba(255, 255, 255, 0.7);
 }
 
-#game .row {
+#boxes .animation:hover {
+    background-color: rgba(255, 255, 255, 0);
+}
+
+#boxes .row {
     justify-content: center;
 }
 
+#gameName {
+    position: absolute;
+    top: 270px;
+}
+
+#gameName p {
+    color: white;
+    font-size: 7rem;
+    animation : animName 0.7s;
+    -webkit-animation : animName 0.7s;
+}
+
+#resultat {
+    display: none;
+    z-index: 2;
+    width: 400px;
+    margin: auto;
+    position: absolute;
+    top: 270px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid black;
+    box-shadow: 4px -4px 5px grey;
+    padding: 10px;
+    background: white;
+}
+
+#resultat p {
+    padding: 20px 0 0 15px;
+    text-align: center;
+}
+
+#resultatP1, #resultatP2  {
+    display: inline-block;
+}
+
+#resultat #close {
+    border: none;
+    font-size: 2rem; 
+    padding-right: 15px;
+}
+
+#reset {
+    padding-top: 200px;
+}
+
+#reset .bouton {
+    font-family: 'Teko', sans-serif;
+    background-color: #65499c;
+    color: white;
+    border-color: #65499c;
+    font-size: 2.4em;
+    margin: 0 30px;
+
+}
+
+#reset .bouton:hover {
+    background-color: #8d74be;
+    border-color: #8d74be;
+}
+
+@keyframes kf_scale {
+    0% {
+      -webkit-transform: scale(0) rotate(360deg);
+    }
+    100% {
+      -webkit-transform: scale(1) rotate(-360deg);
+    }
+}
 
 @-webkit-keyframes kf_scale {
     0% {
@@ -83,4 +159,151 @@ p {
     100% {
       -webkit-transform: scale(1) rotate(-360deg);
     }
-  }
+}
+
+@keyframes unzoom {
+    0% {
+      -webkit-transform: scale(6);
+    }
+    100% {
+      -webkit-transform: scale(1);
+    }
+}
+
+@-webkit-keyframes unzoom {
+    0% {
+      -webkit-transform: scale(6);
+    }
+    100% {
+      -webkit-transform: scale(1);
+    }
+}
+
+@keyframes animName {
+    0% {
+      -webkit-transform: scale(3);
+    }
+    100% {
+      -webkit-transform: scale(1);
+    }
+}
+
+@-webkit-keyframes animName {
+    0% {
+      -webkit-transform: scale(3);
+    }
+    100% {
+      -webkit-transform: scale(1);
+    }
+}
+
+@media screen and (max-width: 1522px) {
+
+    #format .row {
+        text-align: center;
+        padding-top: 140px;
+        padding-left: 100px;
+    }
+    
+}
+
+@media screen and (max-width: 991px) {
+
+    #boxes, #format, #score {
+        top: 0px;
+    }
+
+    #whosPlaying {
+        padding-top: 20px;
+    }
+
+    #format .row {
+        justify-content: flex-end;
+        padding: 20px 0 30px 0;
+    }
+
+    #format button {
+        font-size: 1.7em;
+    }
+
+    #format .bouton2 {
+        margin-top: 0;
+    }
+
+    #score .row {
+        padding-top: 50px;
+        top: 5px;
+        text-align: center;
+    }
+    
+    #reset {
+        padding-top : 20px;
+    }
+    
+}
+
+@media screen and (max-width: 550px) {
+
+    #boxes .animation {
+        width: 100px;
+        height: 100px;
+
+    }
+
+    #resultat {
+        width: 350px;
+    }
+
+    #format button {
+        font-size: 1.5em;
+    }
+
+    #reset .bouton {
+        font-size: 1.5em;
+    }
+
+    #score img {
+        width: 80px;
+        height: 80px;
+    }
+    
+}
+
+@media screen and (max-width: 270px) {
+
+    #boxes .animation {
+        width: 25px;
+        height: 25px;
+
+    }
+
+    #resultat {
+        width: 300px;
+    }
+
+    #whosPlaying {
+        padding-top : 60px;
+    }
+
+    #reset {
+        padding-top: 30px;
+    }
+    
+    #whosPlaying p {
+        font-family: 'Teko', sans-serif;
+        font-size: 1rem;
+    }    
+
+    #whosPlaying img {
+        width: 20px;
+    }
+
+    #reset .bouton {
+        font-size: 1em;
+    }
+
+    #score img {
+        width: 50px;
+        height: 50px;
+    }
+}

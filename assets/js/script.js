@@ -1,104 +1,169 @@
 let vide = "assets/img/empty.png";
-let croix = "assets/img/hippo3.png";
-let rond = "assets/img/hippo2.png";
-let etatBox = [vide, croix, rond];
+let croix = "assets/img/hippo-bleu.png";
+let rond = "assets/img/hippo-rose.png";
 let player1 = 1;
 let player2 = 2;
 let players = [player1, player2];
-let currentPlayer = player1;
+let currentPlayer = player2;
 let joueurActuel = document.getElementById("player");
+let gameName = document.getElementById("gameName");
+let whosPlaying = document.getElementById("whosPlaying");
+let format = document.getElementById("format");
+let grid = document.getElementById("boxes");
+let score = document.getElementById("score");
+let boutons = document.getElementById("reset");
 let winner = document.getElementById("gagnant");
 let textFinal = document.getElementById("winnerText");
 let modalBox = document.getElementById("resultat");
-let case1 = document.getElementById("box1");
-let case2 = document.getElementById("box2");
-let case3 = document.getElementById("box3");
-let case4 = document.getElementById("box4");
-let case5 = document.getElementById("box5");
-let case6 = document.getElementById("box6");
-let case7 = document.getElementById("box7");
-let case8 = document.getElementById("box8");
-let case9 = document.getElementById("box9");
-let allCases = [case1, case2, case3, case4, case5, case6, case7, case8, case9];
-let grid = document.getElementById("boxes");;
+let allCases = document.getElementsByClassName("box");
+let setScoreP1 = 0;
+let setScoreP2 = 0;
+let scoreP1 = document.getElementById("resultatP1");
+let scoreP2 = document.getElementById("resultatP2");
+let isItOver = false;
+let matrice = [
+    [0, 0, 0],
+    [0, 0, 0],
+    [0, 0, 0]
+];
 
-// Indique a quel joueur c'est de jouer 
-
-function player() {
-    if (currentPlayer == player1) {
-        joueurActuel.src = croix;
-    } else if (currentPlayer == player2) {
-        joueurActuel.src = rond;
-    }
-}
-player();
-
-// Permet de changer de joueur après avoir jouer
+// Indique a quel joueur c'est de jouer
 
 function changementJoueur() {
     if (currentPlayer == player1) {
+        joueurActuel.src = rond;
         currentPlayer = player2;
-    } else {
+    } else if (currentPlayer == player2) {
+        joueurActuel.src = croix;
         currentPlayer = player1;
     }
 }
+changementJoueur();
 
 // Si la case est vide, elle se remplit suivant le joueur
-
-function game(caseX) {
-    if (caseX.src.endsWith(vide) && currentPlayer == player1) {
-        caseX.src = croix;
-        changementJoueur();
-        player();
-    } else if (caseX.src.endsWith(vide) && currentPlayer == player2) {
-        caseX.src = rond;
-        changementJoueur();
-        player();
-    } else {
-        alert("La case est déjà prise !");
+function deuxJoueurs() {
+    gameOn();
+    for (i = 0; i < allCases.length; i++) {
+        allCases[i].onclick = function (event) {
+            animation(event.target);
+            bgTransparent(event.target);
+            let x = event.target.dataset.x;
+            let y = event.target.dataset.y;
+            if (matrice[x][y] == 0 && currentPlayer == player1) {
+                matrice[x][y] = 1;
+                event.target.src = croix;
+                win(croix, player1);
+                changementJoueur();
+            } else if (matrice[x][y] == 0 && currentPlayer == player2) {
+                matrice[x][y] = 2;
+                event.target.src = rond;
+                win(rond, player2);
+                changementJoueur();
+            } 
+        }
     }
-    win(croix);
-    win(rond);
 }
 
-case1.onclick = () => { animation(case1), game(case1) };
-case2.onclick = () => { animation(case2), game(case2) };
-case3.onclick = () => { animation(case3), game(case3) };
-case4.onclick = () => { animation(case4), game(case4) };
-case5.onclick = () => { animation(case5), game(case5) };
-case6.onclick = () => { animation(case6), game(case6) };
-case7.onclick = () => { animation(case7), game(case7) };
-case8.onclick = () => { animation(case8), game(case8) };
-case9.onclick = () => { animation(case9), game(case9) };
+function unJoueur() {
+    gameOn();
+    if (currentPlayer == player1) {
+        for (i = 0; i < allCases.length; i++) {
+            allCases[i].onclick = function (event) {
+                animation(event.target);
+                let x = event.target.dataset.x;
+                let y = event.target.dataset.y;
+                if (matrice[x][y] == 0 && currentPlayer == player1) {
+                    matrice[x][y] = 1;
+                    event.target.src = croix;
+                    win(croix, player1);
+                    changementJoueur();
+                    unJoueur();
+                }
+            }
+        }
+    } else if (currentPlayer == player2 && isItOver === false) {
+        let casesVides = [];
+        for (let x = 0; x < matrice.length; x++) {
+            for (let y = 0; y < matrice[x].length; y++) {
+                if (matrice[x][y] == 0) {
+                    casesVides.push([x,y])
+                }
+            }   
+        }
+        let chosenCase = casesVides[Math.floor(Math.random() * casesVides.length)];
+        let x = chosenCase[0];
+        let y = chosenCase[1];
+        matrice[x][y] = player2;
+        setTimeout(function () { 
+            for (let i = 0; i < allCases.length; i++) {
+                if (allCases[i].dataset.x == x && allCases[i].dataset.y == y) {
+                    allCases[i].src = rond;
+                    animation(allCases[i]);
+                }
+            }
+        }, 2000);
+        win(rond, player2);
+        changementJoueur();
+    }
+}
 
 // Fonction qui vérifie les combinaisons gagnantes
 
-function win(etatBoxX) {
+function win(gagnant, player) {
+    stopAnimation(scoreP1);
+    stopAnimation(scoreP2);
     if (
         // Colonnes
-        (case1.src.endsWith(etatBoxX) && case4.src.endsWith(etatBoxX) && case7.src.endsWith(etatBoxX)) ||
-        (case2.src.endsWith(etatBoxX) && case5.src.endsWith(etatBoxX) && case8.src.endsWith(etatBoxX)) ||
-        (case3.src.endsWith(etatBoxX) && case6.src.endsWith(etatBoxX) && case9.src.endsWith(etatBoxX)) ||
+        (matrice[0][0] === player && matrice[1][0] === player && matrice[2][0] === player) ||
+        (matrice[0][1] === player && matrice[1][1] === player && matrice[2][1] === player) ||
+        (matrice[0][2] === player && matrice[1][2] === player && matrice[2][2] === player) ||
         // Lignes
-        (case1.src.endsWith(etatBoxX) && case2.src.endsWith(etatBoxX) && case3.src.endsWith(etatBoxX)) ||
-        (case4.src.endsWith(etatBoxX) && case5.src.endsWith(etatBoxX) && case6.src.endsWith(etatBoxX)) ||
-        (case7.src.endsWith(etatBoxX) && case8.src.endsWith(etatBoxX) && case9.src.endsWith(etatBoxX)) ||
+        (matrice[0][0] === player && matrice[0][1] === player && matrice[0][2] === player) ||
+        (matrice[1][0] === player && matrice[1][1] === player && matrice[1][2] === player) ||
+        (matrice[2][0] === player && matrice[2][1] === player && matrice[2][2] === player) ||
         // Diagonales
-        (case1.src.endsWith(etatBoxX) && case5.src.endsWith(etatBoxX) && case9.src.endsWith(etatBoxX)) ||
-        (case3.src.endsWith(etatBoxX) && case5.src.endsWith(etatBoxX) && case7.src.endsWith(etatBoxX))
+        (matrice[0][2] === player && matrice[1][1] === player && matrice[2][0] === player) ||
+        (matrice[0][0] === player && matrice[1][1] === player && matrice[2][2] === player)
     ) {
-        winner.src = etatBoxX;
+        textFinal.innerHTML = "Joueur " + "<img src=\"" + gagnant + "\" width=\"50px\" >" + " a gagné !";
+        isItOver = true;
         end();
-    } else if (allCases.every(equality)) {
-        textFinal.innerHTML = "Egalité !";
-        end();
+        if (player == player1) {
+            setScoreP1++;
+            updateScore();
+            animScore(scoreP1);
+        } else if (player == player2) {
+            setScoreP2++;
+            updateScore();
+            animScore(scoreP2);
+        }
+        
+    } else {
+        if (equality()) {
+            textFinal.innerHTML = "Egalité !";
+            isItOver = true;
+            end();
+        }
     }
 }
 
-function equality(i) {
-    return !i.src.endsWith(vide)
+function equality() {
+    for (x = 0; x < matrice.length; x++) {
+        for (y = 0; y < matrice.length; y++) {
+            if (matrice[x][y] == 0) {
+                return false;
+            }
+        }
+    }
+    return true;
 }
-;
+
+// Affiche le score sur la page
+
+function updateScore() {
+    scoreP1.innerHTML = setScoreP1;
+    scoreP2.innerHTML = setScoreP2;
+}
 
 // Fin du jeu
 
@@ -111,10 +176,81 @@ function end() {
 // Remet le jeu à zéro
 
 function reset() {
-    location.reload();
+    for (i = 0; i < allCases.length; i++) {
+        allCases[i].src = vide;
+        stopAnimation(allCases[i]);
+    }
+    currentPlayer = player1;
+    joueurActuel.src = croix;
+    modalBox.style.display = 'none';
+    grid.style.cursor = 'pointer';
+    grid.style.pointerEvents = '';
+    matrice = [
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0]
+    ];
+    
+}
+
+function newGame() {
+    chooseFormat();
+    setScoreP1 = 0;
+    setScoreP2 = 0;
+    updateScore();
+    for (i = 0; i < allCases.length; i++) {
+        allCases[i].src = vide;
+    }
+    currentPlayer = player1;
+    joueurActuel.src = croix;
+    modalBox.style.display = 'none';
+    grid.style.cursor = 'pointer';
+    grid.style.pointerEvents = '';
+    matrice = [
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0]
+    ];
+}
+
+function gameOn() {
+    stopAnimation(gameName);
+    whosPlaying.style = 'visibility: visible;';
+    grid.style = 'visibility: visible;';
+    score.style = 'visibility: visible;';
+    boutons.style = 'visibility: visible;';
+    format.style = 'visibility: hidden;';
+    gameName.style = 'visibility: hidden;';
+}
+
+function chooseFormat() {
+    whosPlaying.style = 'visibility: hidden;';
+    grid.style = 'visibility: hidden;';
+    score.style = 'visibility: hidden;';
+    boutons.style = 'visibility: hidden;';
+    format.style = 'visibility: visible;';
+    gameName.style = 'visibility: visible;';
+    animName(gameName);
 }
 
 function animation(caseX) {
     caseX.style = '-webkit-transform:scale(0) rotate(360deg);';
     caseX.style = '-webkit-animation : kf_scale 0.7s';
+}
+
+function animScore(scoreX) {
+    scoreX.style = '-webkit-animation : unzoom 0.3s';
+}
+
+function animName(X) {
+    X.style = '-webkit-animation : animName 0.7s'
+}
+
+function bgTransparent(caseX) {
+    caseX.style.backgroundColor = '';
+}
+
+function stopAnimation(X) {
+    X.style = '';
+    X.style = '';
 }

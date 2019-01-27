@@ -14,36 +14,62 @@
 </head>
 
 <body id="body">
+    <div class="row" id="game">
+        <div class="col-12" id="whosPlaying">
+            <p>Joueur : <img src="assets/img/empty.png" id="player" alt="" width="60px"></p>
+        </div>
 
-    <div id="whosPlaying">
-        <p>Joueur : <img src="assets/img/empty.png" id="player" alt="" width="40px"></p>
-    </div>
-    <div id="game">
-        <div id="boxes">
+        <div class="col-lg-3" id="format">
             <div class="row">
-                <div><img src="assets/img/empty.png" id="box1" alt="" width="80%"></div>
-                <div><img src="assets/img/empty.png" id="box2" alt="" width="80%"></div>
-                <div><img src="assets/img/empty.png" id="box3" alt="" width="80%"></div>
+                <div class="col-lg-12 col-md-2 col-12">
+                    <button onclick="deuxJoueurs()" type="button" class="btn btn-outline-primary bouton">2 joueurs</button>
+                </div>
+                <div class="col-lg-12 col-md-2 col-2">
+                    <button onclick="unJoueur()" type="button" class="btn btn-outline-primary bouton2">1 joueur</button>
+                </div>
+            </div>
+        </div>
+        <div id="gameName"><p>Tic Tac Toe</p>></div>
+        <div class="col-md-12 col-lg-6" id="boxes">
+            <div class="row">
+                <div class="animation"><img src="assets/img/empty.png" data-x="0" data-y="0" class="box" alt="" width="100%"></div>
+                <div class="animation"><img src="assets/img/empty.png" data-x="0" data-y="1" class="box" alt="" width="100%"></div>
+                <div class="animation"><img src="assets/img/empty.png" data-x="0" data-y="2" class="box" alt="" width="100%"></div>
             </div>
             <div class="row">
-                <div><img src="assets/img/empty.png" id="box4" alt="" width="80%"></div>
-                <div><img src="assets/img/empty.png" id="box5" alt="" width="80%"></div>
-                <div><img src="assets/img/empty.png" id="box6" alt="" width="80%"></div>
+                <div class="animation"><img src="assets/img/empty.png" data-x="1" data-y="0" class="box" alt="" width="100%"></div>
+                <div class="animation"><img src="assets/img/empty.png" data-x="1" data-y="1" class="box" alt="" width="100%"></div>
+                <div class="animation"><img src="assets/img/empty.png" data-x="1" data-y="2" class="box" alt="" width="100%"></div>
             </div>
             <div class="row">
-                <div><img src="assets/img/empty.png" id="box7" alt="" width="80%"></div>
-                <div><img src="assets/img/empty.png" id="box8" alt="" width="80%"></div>
-                <div><img src="assets/img/empty.png" id="box9" alt="" width="80%"></div>
+                <div class="animation"><img src="assets/img/empty.png" data-x="2" data-y="0" class="box" alt="" width="100%"></div>
+                <div class="animation"><img src="assets/img/empty.png" data-x="2" data-y="1" class="box" alt="" width="100%"></div>
+                <div class="animation"><img src="assets/img/empty.png" data-x="2" data-y="2" class="box" alt="" width="100%"></div>
             </div>
         </div>
         <div id="resultat">
             <button id="close" type="button" class="close" aria-label="Close" onclick="reset()"><span aria-hidden="true">&times;</span></button>
-            <p id="winnerText">Joueur <img src="assets/img/empty.png" id="gagnant" alt="" width="40px"> a gagné !</p>
+            <p id="winnerText"></p>
+        </div>
+        <div class="col-lg-3" id="score">
+            <div class="row">
+                <div class="col-md-3 col-2"></div>
+                <div class="col-lg-12 col-md-3 col-4">
+                    <img src="assets/img/hippo-bleu.png" width="100px" height="100px" alt="">
+                    <span id="resultatP1"> 0</span>
+                </div>
+                <div class="col-lg-12 col-md-3 col-4">
+                    <img src="assets/img/hippo-rose.png" width="100px" height="100px" alt="">
+                    <span id="resultatP2"> 0</span>
+                </div>
+            </div>
         </div>
     </div>
 
+
     <div id="reset">
-        <button onclick="reset()" type="button" class="btn btn-outline-primary bouton">Rejouer</button>
+        <button onclick="reset()" type="button" class="btn btn-outline-primary bouton">Remettre à zéro</button>
+        <button onclick="newGame()" type="button" class="btn btn-outline-primary bouton">Nouvelle Partie</button>
     </div>
 
 </body>
