@@ -1,6 +1,6 @@
 let vide = "assets/img/empty.png";
-let croix = "assets/img/hippo-bleu.png";
-let rond = "assets/img/hippo-rose.png";
+let croix = "assets/img/racoon.png";
+let rond = "assets/img/fox.png";
 let player1 = 1;
 let player2 = 2;
 let players = [player1, player2];
@@ -86,7 +86,7 @@ function unJoueur() {
         for (let x = 0; x < matrice.length; x++) {
             for (let y = 0; y < matrice[x].length; y++) {
                 if (matrice[x][y] == 0) {
-                    casesVides.push([x,y])
+                    casesVides.push([x,y]);
                 }
             }   
         }
@@ -168,6 +168,7 @@ function updateScore() {
 // Fin du jeu
 
 function end() {
+    isItOver = false;
     modalBox.style.display = 'block';
     grid.style.cursor = 'default';
     grid.style.pointerEvents = 'none';

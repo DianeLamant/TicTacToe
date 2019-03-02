@@ -1,11 +1,20 @@
-#body {
-    background-image: url("../img/background.jpg");
-    background-size: 100%;
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+body {
+    background: url("../img/background4.png") no-repeat;
+    background-size: cover;
 }
 
 p {
     font-family: 'Teko', sans-serif;
     font-size: 3rem;
+}
+
+img {
+    vertical-align: bottom;
 }
 
 #whosPlaying, #boxes, #score, #reset {
@@ -17,9 +26,21 @@ p {
     padding-top : 40px;
 }
 
+#player {
+    width: 60px;
+}
+
 #game {
     position: relative;
     justify-content: center;
+}
+
+.ligne {
+    flex-wrap: nowrap !important;
+}
+
+.box {
+    width: 80%;
 }
 
 #whosPlaying {
@@ -30,7 +51,6 @@ p {
     text-align: center;
     padding-left: 180px;
     padding-top: 140px;
-
 }
 
 #format button {
@@ -38,7 +58,7 @@ p {
     background-color: #74254d;
     color: white;
     border-color: #74254d;
-    font-size: 2.4em;
+    font-size: 2.3em;
 }
 
 #format .bouton2 {
@@ -60,14 +80,18 @@ p {
     color: white;
 }
 
+.imgScore {
+    width: 25%;
+}
+
 #boxes, #format, #score {
-    top: 150px;
+    top: 130px;
 }
 
 #boxes .animation {
     text-align: center;
-    width: 150px;
-    height: 150px;
+    width: 140px;
+    height: 140px;
     cursor: pointer;
     padding: 10px;
     background-color: rgba(255, 255, 255, 0.5);
@@ -125,7 +149,7 @@ p {
 }
 
 #reset {
-    padding-top: 200px;
+    padding-top: 160px;
 }
 
 #reset .bouton {
@@ -235,6 +259,14 @@ p {
         top: 5px;
         text-align: center;
     }
+
+    .imgScore {
+        width: 40%;
+    }
+
+    #score span {
+        font-size: 4rem;
+    }
     
     #reset {
         padding-top : 20px;
@@ -242,14 +274,14 @@ p {
     
 }
 
+@media screen and (max-width: 768px) {
+
+
+    
+}
+
 @media screen and (max-width: 550px) {
-
-    #boxes .animation {
-        width: 100px;
-        height: 100px;
-
-    }
-
+    
     #resultat {
         width: 350px;
     }
@@ -261,21 +293,13 @@ p {
     #reset .bouton {
         font-size: 1.5em;
     }
+}
 
-    #score img {
-        width: 80px;
-        height: 80px;
-    }
-    
+@media screen and (max-width: 550px) {
+
 }
 
 @media screen and (max-width: 270px) {
-
-    #boxes .animation {
-        width: 25px;
-        height: 25px;
-
-    }
 
     #resultat {
         width: 300px;
@@ -293,10 +317,6 @@ p {
         font-family: 'Teko', sans-serif;
         font-size: 1rem;
     }    
-
-    #whosPlaying img {
-        width: 20px;
-    }
 
     #reset .bouton {
         font-size: 1em;

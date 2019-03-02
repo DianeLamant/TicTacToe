@@ -5,46 +5,46 @@
 <head>
     <meta charset="UTF8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <script type="text/javascript" src="assets/js/script.js" defer></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
         crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Teko" rel="stylesheet">
+    <script type="text/javascript" src="assets/js/script.js" defer></script>
     <title>Tic Tac Toe</title>
 </head>
 
-<body id="body">
+<body>
     <div class="row" id="game">
         <div class="col-12" id="whosPlaying">
-            <p>Joueur : <img src="assets/img/empty.png" id="player" alt="" width="60px"></p>
+            <p>Joueur : <img src="assets/img/empty.png" id="player" alt=""></p>
         </div>
 
         <div class="col-lg-3" id="format">
             <div class="row">
-                <div class="col-lg-12 col-md-2 col-12">
-                    <button onclick="deuxJoueurs()" type="button" class="btn btn-outline-primary bouton">2 joueurs</button>
+                <div class="col-6 col-sm-6 col-md-2 col-lg-12 divBtn1">
+                    <button onclick="deuxJoueurs()" type="button" class="btn btn-outline-primary bouton1">2 joueurs</button>
                 </div>
-                <div class="col-lg-12 col-md-2 col-2">
+                <div class="col-6 col-sm-6 col-md-2 col-lg-12 divBtn2">
                     <button onclick="unJoueur()" type="button" class="btn btn-outline-primary bouton2">1 joueur</button>
                 </div>
             </div>
         </div>
         <div id="gameName"><p>Tic Tac Toe</p>></div>
-        <div class="col-md-12 col-lg-6" id="boxes">
-            <div class="row">
-                <div class="animation"><img src="assets/img/empty.png" data-x="0" data-y="0" class="box" alt="" width="100%"></div>
-                <div class="animation"><img src="assets/img/empty.png" data-x="0" data-y="1" class="box" alt="" width="100%"></div>
-                <div class="animation"><img src="assets/img/empty.png" data-x="0" data-y="2" class="box" alt="" width="100%"></div>
+        <div class="col-12 col-md-12 col-lg-6" id="boxes">
+            <div class="row ligne">
+                <div class="animation"><img src="assets/img/empty.png" data-x="0" data-y="0" class="box" alt=""></div>
+                <div class="animation"><img src="assets/img/empty.png" data-x="0" data-y="1" class="box" alt=""></div>
+                <div class="animation"><img src="assets/img/empty.png" data-x="0" data-y="2" class="box" alt=""></div>
             </div>
-            <div class="row">
-                <div class="animation"><img src="assets/img/empty.png" data-x="1" data-y="0" class="box" alt="" width="100%"></div>
-                <div class="animation"><img src="assets/img/empty.png" data-x="1" data-y="1" class="box" alt="" width="100%"></div>
-                <div class="animation"><img src="assets/img/empty.png" data-x="1" data-y="2" class="box" alt="" width="100%"></div>
+            <div class="row ligne">
+                <div class="animation"><img src="assets/img/empty.png" data-x="1" data-y="0" class="box" alt=""></div>
+                <div class="animation"><img src="assets/img/empty.png" data-x="1" data-y="1" class="box" alt=""></div>
+                <div class="animation"><img src="assets/img/empty.png" data-x="1" data-y="2" class="box" alt=""></div>
             </div>
-            <div class="row">
-                <div class="animation"><img src="assets/img/empty.png" data-x="2" data-y="0" class="box" alt="" width="100%"></div>
-                <div class="animation"><img src="assets/img/empty.png" data-x="2" data-y="1" class="box" alt="" width="100%"></div>
-                <div class="animation"><img src="assets/img/empty.png" data-x="2" data-y="2" class="box" alt="" width="100%"></div>
+            <div class="row ligne">
+                <div class="animation"><img src="assets/img/empty.png" data-x="2" data-y="0" class="box" alt=""></div>
+                <div class="animation"><img src="assets/img/empty.png" data-x="2" data-y="1" class="box" alt=""></div>
+                <div class="animation"><img src="assets/img/empty.png" data-x="2" data-y="2" class="box" alt=""></div>
             </div>
         </div>
         <div id="resultat">
@@ -55,11 +55,11 @@
             <div class="row">
                 <div class="col-md-3 col-2"></div>
                 <div class="col-lg-12 col-md-3 col-4">
-                    <img src="assets/img/hippo-bleu.png" width="100px" height="100px" alt="">
+                    <img src="assets/img/racoon.png" class="imgScore" alt="">
                     <span id="resultatP1"> 0</span>
                 </div>
                 <div class="col-lg-12 col-md-3 col-4">
-                    <img src="assets/img/hippo-rose.png" width="100px" height="100px" alt="">
+                    <img src="assets/img/fox.png" class="imgScore" alt="">
                     <span id="resultatP2"> 0</span>
                 </div>
             </div>
