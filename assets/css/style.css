@@ -274,14 +274,12 @@ img {
     
 }
 
-@media screen and (max-width: 768px) {
-
-
+@media screen and (max-width: 575px) {
     
-}
+    .imgScore {
+        width: 20%;
+    }
 
-@media screen and (max-width: 550px) {
-    
     #resultat {
         width: 350px;
     }
@@ -295,35 +293,34 @@ img {
     }
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 400px) {
 
+    #gameName p {
+        font-size: 4rem;
+    }
 }
 
 @media screen and (max-width: 270px) {
 
+    #gameName p {
+        font-size: 3rem;
+    }
+
+    .imgScore {
+        width: 40%;
+    }
+
     #resultat {
         width: 300px;
-    }
-
-    #whosPlaying {
-        padding-top : 60px;
-    }
-
-    #reset {
-        padding-top: 30px;
     }
     
     #whosPlaying p {
         font-family: 'Teko', sans-serif;
-        font-size: 1rem;
+        font-size: 2.4rem;
     }    
 
     #reset .bouton {
-        font-size: 1em;
-    }
-
-    #score img {
-        width: 50px;
-        height: 50px;
+        margin-top: 30px;
+        font-size: 2em;
     }
 }

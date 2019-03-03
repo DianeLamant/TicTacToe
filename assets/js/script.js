@@ -101,8 +101,8 @@ function unJoueur() {
                     animation(allCases[i]);
                 }
             }
+            win(rond, player2);
         }, 2000);
-        win(rond, player2);
         changementJoueur();
     }
 }
