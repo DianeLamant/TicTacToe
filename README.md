@@ -18,7 +18,7 @@ Créer un Tic Tac Toe jouable à 2 en Javascript, HTML et CSS
 La grille doit utiliser bootstrap pour s'afficher (elle fait toujours 3 colonnes, peu importe la taille de l'écran, mais les images doivent s'adapter)
 
 Chaque case affiche :
-- soit une case vide (trasparente)
+- soit une case vide (transparente)
 - soit une croix
 - soit un rond
 
